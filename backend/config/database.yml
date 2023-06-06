@@ -1,0 +1,21 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: root
+  host: db
+
+development:
+  <<: *default
+  database: book-shelves_development
+
+test:
+  <<: *default
+  database: book-shelves_test
+
+production:
+  <<: *default
+  database: book-shelves_production
+  username: <%= ENV['BOOK_SHELVES_DATABASE_USER'] %>
+  password: <%= ENV['BOOK_SHELVES_DATABASE_PASSWORD'] %>
