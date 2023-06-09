@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   resources :users
   get '/auth/:provider/callback', to: 'sessions#create'
   resources :reading_notes
-  resources :discussions
+  resources :discussions do
+    resources :comments
+  end
 end
