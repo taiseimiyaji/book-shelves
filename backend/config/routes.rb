@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :books
   resources :users
   get '/auth/:provider/callback', to: 'sessions#create'
+  resources :reading_notes
 end
