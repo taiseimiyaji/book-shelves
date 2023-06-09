@@ -3,4 +3,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  resources :books
+  resources :users
+  get '/auth/:provider/callback', to: 'sessions#create'
+  resources :reading_notes
+  resources :discussions do
+    resources :comments
+  end
 end
