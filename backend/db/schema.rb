@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_09_104935) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_09_122355) do
   create_table "books", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.string "author"
@@ -38,6 +38,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_09_104935) do
     t.index ["user_id"], name: "index_discussions_on_user_id"
   end
 
+  create_table "profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "avatar_url"
+    t.text "introduction"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "reading_notes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "content"
@@ -59,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_09_104935) do
   add_foreign_key "comments", "discussions"
   add_foreign_key "comments", "users"
   add_foreign_key "discussions", "users"
+  add_foreign_key "profiles", "users"
   add_foreign_key "reading_notes", "books"
   add_foreign_key "reading_notes", "users"
 end
