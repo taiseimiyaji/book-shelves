@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_09_103637) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_09_104424) do
   create_table "books", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.string "author"
@@ -18,6 +18,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_09_103637) do
     t.string "isbn"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "discussions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_discussions_on_user_id"
   end
 
   create_table "reading_notes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -38,6 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_09_103637) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "discussions", "users"
   add_foreign_key "reading_notes", "books"
   add_foreign_key "reading_notes", "users"
 end
